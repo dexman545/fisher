@@ -60,30 +60,20 @@ public class Movement {
 				} 
 				return false;
 			case "Bishop":
-				 if (testBishopMove(F1, R1, F2, R2)) {
-					 return true;
-				 } else return false;
+				 return testBishopMove(F1, R1, F2, R2);
 				
 			case "Rook":
-				if (testRookMove(F1, R1, F2, R2)) {
-					 return true;
-				 } else return false;
-			
+				return testRookMove(F1, R1, F2, R2);
+
 			case "Queen":
-				if (testRookMove(F1, R1, F2, R2) | testBishopMove(F1, R1, F2, R2)) {
-					 return true;
-				 } else return false;
+				return testRookMove(F1, R1, F2, R2) | testBishopMove(F1, R1, F2, R2);
 					
 			case "Knight":
-				if (testKnightMove(F1, R1, F2, R2)) {
-					 return true;
-				 } else return false;
+				return testKnightMove(F1, R1, F2, R2);
 					
 			case "King":
 				if (Math.abs(F1-F2) <= 1 & Math.abs(R1-R2) <= 1) {
-					if (testRookMove(F1, R1, F2, R2) | testBishopMove(F1, R1, F2, R2)) {
-						 return true;
-					 } else return false;
+					return testRookMove(F1, R1, F2, R2) | testBishopMove(F1, R1, F2, R2);
 				} return false;
 			default: 
 				System.out.println("No piece found to move, please try again elsewhere");
@@ -115,30 +105,20 @@ public class Movement {
 				} 
 				return false;
 			case "Bishop":
-				 if (testBishopMove(F1, R1, F2, R2)) {
-					 return true;
-				 } else return false;
+				return testBishopMove(F1, R1, F2, R2);
 				
 			case "Rook":
-				if (testRookMove(F1, R1, F2, R2)) {
-					 return true;
-				 } else return false;
+				return testRookMove(F1, R1, F2, R2);
 			
 			case "Queen":
-				if (testRookMove(F1, R1, F2, R2) | testBishopMove(F1, R1, F2, R2)) {
-					 return true;
-				 } else return false;
+				return testRookMove(F1, R1, F2, R2) | testBishopMove(F1, R1, F2, R2);
 					
 			case "Knight":
-				if (testKnightMove(F1, R1, F2, R2)) {
-					 return true;
-				 } else return false;
+				return testKnightMove(F1, R1, F2, R2);
 					
 			case "King":
 				if (Math.abs(F1-F2) <= 1 & Math.abs(R1-R2) <= 1) {
-					if (testRookMove(F1, R1, F2, R2) | testBishopMove(F1, R1, F2, R2)) {
-						 return true;
-					 } else return false;
+					return testRookMove(F1, R1, F2, R2) | testBishopMove(F1, R1, F2, R2);
 				} return false;
 			default: 
 				System.out.println("No piece found to move, please try again elsewhere");
@@ -426,8 +406,8 @@ public class Movement {
 			String[][] tempBoard = Board.board;
 			
 			movePiece(args[0], args[1]);
-			
-			if (DetectionSystem.detectCheck()) {
+
+		if (DetectionSystem.detectCheck()) {
 				for (int i=0; i < Board.board.length ; i++) {
 				   	for (int j=0; j < Board.board[i].length ; j++) {
 				     	Board.board[i][j] = tempBoard[i][j];
