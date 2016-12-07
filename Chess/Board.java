@@ -34,7 +34,7 @@ public interface Board {
 		   	for (int j=0; j < board[i].length ; j++)
 		     	System.out.println(file[i] + "" + (j+1) + " " + board[i][j]);
 		*/
-	Main.newTurn();
+	//Main.newTurn();
 	//load the game args[2] is the file to be loaded from the save folder, either Board, time, or turn
 	} else if (args[0] == "load"){
 		System.out.println("Loading..."+ args[2]);

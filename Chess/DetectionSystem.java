@@ -1,6 +1,6 @@
 package Chess;
 
-//detect various parts of endgame. 
+//detect various parts of endgame.
 
 public class DetectionSystem {
 	
@@ -33,8 +33,6 @@ public class DetectionSystem {
 				    		   	for (int o=0; o < 8 ; o++) {
 				    		   		String F2 = Main.getCharForNumber((u+1));
 				    		     	String R2 = Integer.toString((o+1));
-				    		     	//System.out.println(F2 + R2);
-				    		     	//System.out.println(Movement.canMove(color2, F2 + R2, F1 + R1));
 				    		     	b = Movement.canMove(color2, F2 + R2, F1 + R1) || b;
 				    		   	} 
 				    		   	
@@ -97,6 +95,7 @@ public class DetectionSystem {
                                             } else u = u - 2;
                                     	}
                                     case "Queen":
+										//TODO finish detectStalemate
                                     case "Knight":
                                     case "King":
                                     	

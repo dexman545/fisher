@@ -1,8 +1,9 @@
 package Chess;
 
 public class Main {
-	
-	public static int turn = 1;
+
+	//white is even numbers, black odd
+	public static int turn = 0;
 	
 	//Create win/loss variables. If either becomes false, game ends
 	public static boolean wCanWin = true;
@@ -41,13 +42,7 @@ public class Main {
 	
 	public static void main(String...args) {
 		Board.createBoard("new");
-		//Movement.move("A2", "A4");
-		//Board.board[4][0] = null;
-		//Board.board[0][6] = "w.King";
-		//Board.board[1][6] = "b.Queen";
-		//newTurn();
 		FileHandler.save("test", "Board");
-		//check if endgame condition
 		
 	}
 

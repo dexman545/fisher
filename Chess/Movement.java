@@ -8,7 +8,7 @@ public class Movement {
 
 	try {
 		//Get the places from notation
-		//f1 r1 are temp vars to get the characters in chess notation. F1 R1 are the intial, numeric locations for use in Board.board[][]
+		//f1 r1 are temp vars to get the characters in chess notation. F1 R1 are the initial, numeric locations for use in Board.board[][]
 		String space = args[1].toUpperCase();
 		char f1 = space.charAt(0);
 		char r1 = space.charAt(1);
