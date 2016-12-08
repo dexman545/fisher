@@ -6,7 +6,7 @@ import Chess.Board;
 public interface FileHandler {
 	public static void read(String...args){
 		//reads inputs
-        String fileName = System.getProperty("user.dir") + System.getProperty("file.separator") + "ABChess Save Games" + System.getProperty("file.separator") + args[0] + System.getProperty("file.separator") + args[1] + ".txt";
+        String fileName = System.getProperty("user.dir") + System.getProperty("file.separator") + "ABChess Saved Games" + System.getProperty("file.separator") + args[0] + System.getProperty("file.separator") + args[1] + ".txt";
 
         String line = null;
 
@@ -41,7 +41,7 @@ public interface FileHandler {
 	public static void save(String... args) {
 		//args in terms of save folder, then the file to be save
 		//Create save folder if it doesn't exist
-		String saveFolder = System.getProperty("user.dir") + System.getProperty("file.separator") + "ABChess Save Games";
+		String saveFolder = System.getProperty("user.dir") + System.getProperty("file.separator") + "ABChess Saved Games";
 		File saveF = new File(saveFolder);
 		if(!saveF.exists()) {
 			saveF.mkdir();
@@ -51,7 +51,7 @@ public interface FileHandler {
 		try {
 			String[][] board = Board.board;
 			String fileName = args[0]+".txt";
-			String savePath = System.getProperty("user.dir") + System.getProperty("file.separator") + "ABChess Save Games" + System.getProperty("file.separator") + args[0];
+			String savePath = System.getProperty("user.dir") + System.getProperty("file.separator") + "ABChess Saved Games" + System.getProperty("file.separator") + args[0];
 			File saveLocation = new File(savePath);
 			    if(!saveLocation.exists()){
 			         saveLocation.mkdir();
