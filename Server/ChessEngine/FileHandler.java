@@ -1,7 +1,8 @@
-package Chess;
+package Server.ChessEngine;
+
+import Server.ChessEngine.Board;
 
 import java.io.*;
-import Chess.Board;
 
 public interface FileHandler {
 	public static void read(String...args){

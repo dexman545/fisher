@@ -1,6 +1,10 @@
-package Chess;
+package Server.ChessEngine;
 
 public class Main {
+
+	//TODO GUI, Timer, finishing detection systems, optimisations, internet communications, recording moves.
+	//May want to setup client and server packages for netcode organization
+	//May want to set save format to be XML so that everything can be saved in one document instead of multiples
 
 	//white is even numbers, black odd
 	public static int turn = 0;
@@ -41,8 +45,9 @@ public class Main {
 	}
 	
 	public static void main(String...args) {
-		Board.createBoard("new");
-		FileHandler.save("test", "Board");
+		//Board.createBoard("new");
+		//FileHandler.save("test", "Board");
+		FileHandler.read("test", "Board");
 		
 	}
 

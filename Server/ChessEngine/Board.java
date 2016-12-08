@@ -1,4 +1,5 @@
-package Chess;
+package Server.ChessEngine;
+
 //Use JavaFX for GUI/render
 public interface Board {
 	

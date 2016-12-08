@@ -1,4 +1,4 @@
-package Chess;
+package Server.ChessEngine;
 
 //detect various parts of endgame.
 

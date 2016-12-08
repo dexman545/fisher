@@ -1,5 +1,6 @@
-package Chess;
-//after pawn/rook/king move, add ".hasMoved.ep" 
+package Server.ChessEngine;
+
+//after pawn/rook/king move, add ".hasMoved.ep"
 public class Movement {
 
 	// check to see if the piece can move to the desired square
