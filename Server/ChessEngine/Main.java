@@ -17,6 +17,7 @@ public class Main {
 		turn = turn + 1;
 		
 		DetectionSystem.endGame();
+		//DetectionSystem.detectMate();
 		
 		//DetectionSystem.escapePosibilities();
 		
@@ -45,9 +46,14 @@ public class Main {
 	}
 	
 	public static void main(String...args) {
-		//Board.createBoard("new");
-		//FileHandler.save("test", "Board");
-		FileHandler.read("test", "Board");
+		Board.createBoard("new");
+
+		Movement.movePiece("e2", "e4");
+		newTurn();
+		Movement.movePiece("e7", "e5");
+
+		FileHandler.save("test", "Board");
+		//FileHandler.read("test", "Board");
 		
 	}
 
@@ -67,5 +73,11 @@ public class Main {
 	public static String getCharForNumber(int i) {
 	    return i > 0 && i < 27 ? String.valueOf((char)(i + 'A' - 1)) : null;
 	}
+
+	public static String colorToMove() {
+	    if (turn%2 == 0) {
+	        return "w";
+        } else return "b";
+    }
 	
 }

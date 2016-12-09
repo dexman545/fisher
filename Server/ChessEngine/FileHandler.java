@@ -4,6 +4,7 @@ import Server.ChessEngine.Board;
 
 import java.io.*;
 
+
 public interface FileHandler {
 	public static void read(String...args){
 		//reads inputs

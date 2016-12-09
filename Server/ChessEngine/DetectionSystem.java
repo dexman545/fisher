@@ -50,6 +50,7 @@ public class DetectionSystem {
 	
     public static boolean detectStalemate() {
         boolean b = true;
+        String color = Main.colorToMove();
         if (!detectCheck()) {
             for (int i=0; i < 8 ; i++) {
                 for (int j=0; j < 8 ; j++) {
@@ -58,8 +59,7 @@ public class DetectionSystem {
                         String F1 = Main.getCharForNumber((i+1));
                         String R1 = Integer.toString((j+1));
                         
-                        if (piece[0].contentEquals("w")) {
-                            String color = "w";
+                        if (piece[0].contentEquals(color)) {
                                     switch (piece[1]) {
                                     case "Pawn": 
                                     	int u = 1;
@@ -69,7 +69,7 @@ public class DetectionSystem {
                                             String R2 = Integer.toString((j+1+z));
                                             if (Movement.canMove(color, F1 + R1, F2 + R2)) {
                                                 b = false;
-                                                //return b;
+                                                return b;
                                             } else u = u - 1;
                                     	}
                                     case "Rook":
@@ -79,7 +79,7 @@ public class DetectionSystem {
                                             String R2 = Integer.toString((j+1+z));
                                             if (Movement.canMove(color, F1 + R1, F2 + R2)) {
                                                 b = false;
-                                                //return b;
+                                                return b;
                                             } else u = u - 1;
                                     	}
                                     case "Bishop":
@@ -91,7 +91,7 @@ public class DetectionSystem {
                                             System.out.println(F1 + R1 + " " + F2 + R2);
                                             if (Movement.canMove(color, F1 + R1, F2 + R2)) {
                                                 b = false;
-                                                //return b;
+                                                return b;
                                             } else u = u - 2;
                                     	}
                                     case "Queen":
@@ -124,9 +124,10 @@ public class DetectionSystem {
 	public static boolean endGame() {
 		if (detectStalemate() | detectMate()) {
 			System.out.println("A mate has occurred!");
+			System.out.println(detectStalemate());
+			System.out.println(detectMate());
 			return true;
 		}
-		//System.out.println(detectStalemate());
 		return false;
 	}
 	
