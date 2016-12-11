@@ -7,13 +7,9 @@ public class DetectionSystem {
 	public static boolean detectCheck() {
 		
 		boolean b = false;
-		
-		//get color to move
-		String color = "w"; 
-		if (Main.turn%2 == 0) {
-			color = "w"; 
-		} else color = "b";
-		
+
+		String color = Main.colorToMove();
+
 		//Invert color to get the enemy of who is being checked for check
 		String color2 = "w";
 		if (color.contentEquals("b")) {
@@ -135,34 +131,38 @@ public class DetectionSystem {
 	
 	//Checks whether or not check can be avoided
 	public static boolean escapePosibilities() {
-		String[][] tempBoard = Board.board;
-		boolean canEscape = false;
-		
-		for (int i=0; i < 8 ; i++) {
-		   	for (int j=0; j < 8 ; j++) {
-		   		if (Board.board[i][j] != null) {
-		   			String F1 = Main.getCharForNumber((i+1));
-		   			String R1 = Integer.toString((j+1));
-		   				
-		   				
-		   				for (int u=0; u < 8 ; u++) {
-			    		   	for (int o=0; o < 8 ; o++) {
-			    		   		String F2 = Main.getCharForNumber((u+1));
-			    		     	String R2 = Integer.toString((o+1));
-			    		     	Movement.movePiece(F1+R1, F2+R2);
-			    		     	if (DetectionSystem.detectCheck()) {
-			    		     		for (int h=0; h < 8 ; h++) {
-			    		     			for (int g=0; g < 8 ; g++) {
-			    		     				Board.board[h][g] = tempBoard[h][g];
-			    		     				canEscape = !detectCheck() || canEscape;
-			    		     			}
-			    		     		}
-			    		     	}
-			    		   	}
-		   				} 
-		   		}
-		   	}
-		} return canEscape;
+		if (detectCheck()) {
+			String[][] tempBoard = Board.board;
+			boolean canEscape = false;
+
+			//go through entire board, and if there is a piece at that location...
+			for (int i=0; i < 8 ; i++) {
+				for (int j=0; j < 8 ; j++) {
+					if (Board.board[i][j] != null) {
+
+						String F1 = Main.getCharForNumber((i+1));
+						String R1 = Integer.toString((j+1));
+
+
+						for (int u=0; u < 8 ; u++) {
+							for (int o=0; o < 8 ; o++) {
+								String F2 = Main.getCharForNumber((u+1));
+								String R2 = Integer.toString((o+1));
+								Movement.movePiece(F1+R1, F2+R2);
+								if (DetectionSystem.detectCheck()) {
+									for (int h=0; h < 8 ; h++) {
+										for (int g=0; g < 8 ; g++) {
+											Board.board[h][g] = tempBoard[h][g];
+											canEscape = !detectCheck() || canEscape;
+										}
+									}
+								} else canEscape = true;
+							}
+						}
+					}
+				}
+			} return canEscape;
+		} else return true;
 	}
 		
 

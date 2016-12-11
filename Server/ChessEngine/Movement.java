@@ -1,5 +1,6 @@
 package Server.ChessEngine;
 
+//TODO CASTLING, YOU FOOL!
 //after pawn/rook/king move, add ".hasMoved.ep"
 public class Movement {
 
@@ -338,7 +339,7 @@ public class Movement {
 		
 	}
 	
-	//Actually move the piece
+	//Actually move the piece; THIS IS NOT THE ONE TO USE, USED ONLY FOR TESTING THEORETICAL MOVEMENT
 	
 	public static void movePiece(String...args) {
 		//Args in terms of Square1, Square2
@@ -349,133 +350,109 @@ public class Movement {
 		char r1 = space.charAt(1);
 		int F1 = Main.convertCharToInt(f1);
 		int R1 = Character.getNumericValue(r1) - 1;
-		
-		String[] sqrPiece = {null, null};
+
         
         char f2 = args[1].toUpperCase().charAt(0);
 		char r2 = args[1].charAt(1);
 		int F2 = Main.convertCharToInt(f2);
 		int R2 = Character.getNumericValue(r2) - 1;
-		
+
 		String sqrToMove = Board.board[F1][R1];
-		if (sqrToMove != null) {
-			 sqrPiece = sqrToMove.split("[.]+");
-			
-		}
 		
 		//get colour to move
-		String person = null;
-		if (Main.turn%2 == 0) {
-			person = "w";
-		} else person = "b";
+		String person = Main.colorToMove();
 		
 		//Begin moving piece
 		if (canMove(person, args[0], args[1])) {
-			switch (sqrPiece[1]) {
-			case "Pawn": 
-				if (sqrPiece.length == 3) {
-					Board.board[F2][R2] = (sqrToMove);
-					Board.board[F1][R1] = null;
-					break;
-				} else {
-				Board.board[F2][R2] = (sqrToMove);
-				Board.board[F1][R1] = null;
-				break;
-				}
-			case "Rook":
-				Board.board[F2][R2] = (sqrToMove);
-				Board.board[F1][R1] = null;
-				break;
-			case "King":
-				Board.board[F2][R2] = (sqrToMove);
-				Board.board[F1][R1] = null;
-				break;
-			default: 
-				Board.board[F2][R2] = sqrToMove;
-				Board.board[F1][R1] = null;
-				break;
-			}
+			Board.board[F2][R2] = (sqrToMove);
+			Board.board[F1][R1] = null;
 			
-		} //else System.out.println("Cannot move!");
+		}
 		
 	}
-	
+
+	//Actually move the piece
 	public static void move(String...args) {
 		//Args in terms of Square1, Square2
 		
-		//if (DetectionSystem.detectCheck()) {
-			String[][] tempBoard = Board.board;
+
+		String[][] tempBoard = Board.board;
 			
-			movePiece(args[0], args[1]);
+		movePiece(args[0], args[1]);
 
 		if (DetectionSystem.detectCheck()) {
-				for (int i=0; i < Board.board.length ; i++) {
-				   	for (int j=0; j < Board.board[i].length ; j++) {
-				     	Board.board[i][j] = tempBoard[i][j];
-				   	}
+			for (int i=0; i < Board.board.length ; i++) {
+				for (int j=0; j < Board.board[i].length ; j++) {
+					Board.board[i][j] = tempBoard[i][j];
 				}
-				System.out.println("Move is illegal! Thou art checked!");
 			}
-		//} else {
+			System.out.println("Move is illegal! Thou art checked!");
+		} else {
+			for (int i=0; i < Board.board.length ; i++) {
+				for (int j=0; j < Board.board[i].length ; j++) {
+					Board.board[i][j] = tempBoard[i][j];
+				}
+			}
+
 			//parse args into usable ints
 			String space = args[0].toUpperCase();
 			char f1 = space.charAt(0);
 			char r1 = space.charAt(1);
 			int F1 = Main.convertCharToInt(f1);
 			int R1 = Character.getNumericValue(r1) - 1;
-			
+
 			String[] sqrPiece = {null, null};
-	        
-	        char f2 = args[1].toUpperCase().charAt(0);
+
+			char f2 = args[1].toUpperCase().charAt(0);
 			char r2 = args[1].charAt(1);
 			int F2 = Main.convertCharToInt(f2);
 			int R2 = Character.getNumericValue(r2) - 1;
-			
+
 			String sqrToMove = Board.board[F1][R1];
 			if (sqrToMove != null) {
-				 sqrPiece = sqrToMove.split("[.]+");
-				
+				sqrPiece = sqrToMove.split("[.]+");
+
 			}
-			
+
 			//get colour to move
-			String person = null;
-			if (Main.turn%2 == 0) {
-				person = "w";
-			} else person = "b";
-			
+			String person = Main.colorToMove();
+
 			//Begin moving piece
 			if (canMove(person, args[0], args[1])) {
 				switch (sqrPiece[1]) {
-				case "Pawn": 
-					if (sqrPiece.length == 3) {
-						Board.board[F2][R2] = (sqrToMove);
+					case "Pawn":
+						if (sqrPiece.length == 3) {
+							Board.board[F2][R2] = (sqrToMove);
+							Board.board[F1][R1] = null;
+							System.out.println("Moved!");
+							break;
+						} else {
+							Board.board[F2][R2] = (sqrToMove + ".hasMoved.ep");
+							Board.board[F1][R1] = null;
+							System.out.println("Moved!");
+							break;
+						}
+					case "Rook":
+						Board.board[F2][R2] = (sqrToMove + ".hasMoved");
 						Board.board[F1][R1] = null;
 						System.out.println("Moved!");
 						break;
-					} else {
-					Board.board[F2][R2] = (sqrToMove + ".hasMoved.ep");
-					Board.board[F1][R1] = null;
-					System.out.println("Moved!");
-					break;
-					}
-				case "Rook":
-					Board.board[F2][R2] = (sqrToMove + ".hasMoved");
-					Board.board[F1][R1] = null;
-					System.out.println("Moved!");
-					break;
-				case "King":
-					Board.board[F2][R2] = (sqrToMove + ".hasMoved");
-					Board.board[F1][R1] = null;
-					System.out.println("Moved!");
-					break;
-				default: 
-					Board.board[F2][R2] = sqrToMove;
-					Board.board[F1][R1] = null;
-					System.out.println("Moved!");
-					break;
+					case "King":
+						Board.board[F2][R2] = (sqrToMove + ".hasMoved");
+						Board.board[F1][R1] = null;
+						System.out.println("Moved!");
+						break;
+					default:
+						Board.board[F2][R2] = sqrToMove;
+						Board.board[F1][R1] = null;
+						System.out.println("Moved!");
+						break;
 				}
-				
+
 			}
+		}
+
+
 		}
 		
 	}

@@ -48,9 +48,9 @@ public class Main {
 	public static void main(String...args) {
 		Board.createBoard("new");
 
-		Movement.movePiece("e2", "e4");
+		Movement.move("e2", "e4");
 		newTurn();
-		Movement.movePiece("e7", "e5");
+		Movement.move("e7", "e5");
 
 		FileHandler.save("test", "Board");
 		//System.out.println(Movement.canMove("b", "h7", "h6"));
