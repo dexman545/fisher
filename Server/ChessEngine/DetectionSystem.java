@@ -58,20 +58,22 @@ public class DetectionSystem {
                         String[] piece = Board.board[i][j].split("[.]+");
                         String F1 = Main.getCharForNumber((i+1));
                         String R1 = Integer.toString((j+1));
+
+                        int u;
                         
                         if (piece[0].contentEquals(color)) {
                                     switch (piece[1]) {
-                                    case "Pawn": 
-                                    	int u = 1;
-                                    	int staggeredIncrement = 0;
-                                    	for (int z = 1; z < 3; z += ++staggeredIncrement%3 == 2 ? 1 : 0) {
-                                    		String F2 = Main.getCharForNumber((i+u));
-                                            String R2 = Integer.toString((j+1+z));
-                                            if (Movement.canMove(color, F1 + R1, F2 + R2)) {
-                                                b = false;
-                                                return b;
-                                            } else u = u - 1;
-                                    	}
+										case "Pawn":
+											for (u = -1; u < 2; u++) {
+												String F2 = Main.getCharForNumber((i+u+1));
+												String R2 = Integer.toString(((j+1) + (color.contentEquals("w") ? 1:-1)));
+												//System.out.println("Color: " + color + " " + (F1+R1) + " " + (F2+R2));
+												if (Movement.canMove(color, F1 + R1, F2 + R2)) {
+													b = false;
+													System.out.println("meh2");
+													return b;
+												}
+											}
                                     case "Rook":
                                     	u = 1;
                                     	for (int z = 0; z < 2; z++) {
@@ -84,11 +86,11 @@ public class DetectionSystem {
                                     	}
                                     case "Bishop":
                                     	u = 1;
-                                    	staggeredIncrement = 0;
+                                    	int staggeredIncrement = 0;
                                     	for (int z = 1; z > -2; z -= ++staggeredIncrement%2 == 0 ? 2 : 0) {
                                     		String F2 = Main.getCharForNumber((i+u));
                                             String R2 = Integer.toString((j+1+z));
-                                            System.out.println(F1 + R1 + " " + F2 + R2);
+                                            //System.out.println(F1 + R1 + " " + F2 + R2);
                                             if (Movement.canMove(color, F1 + R1, F2 + R2)) {
                                                 b = false;
                                                 return b;
@@ -124,8 +126,8 @@ public class DetectionSystem {
 	public static boolean endGame() {
 		if (detectStalemate() | detectMate()) {
 			System.out.println("A mate has occurred!");
-			System.out.println(detectStalemate());
-			System.out.println(detectMate());
+			//System.out.println(detectStalemate());
+			//System.out.println(detectMate());
 			return true;
 		}
 		return false;

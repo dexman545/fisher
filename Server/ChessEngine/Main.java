@@ -53,6 +53,7 @@ public class Main {
 		Movement.movePiece("e7", "e5");
 
 		FileHandler.save("test", "Board");
+		//System.out.println(Movement.canMove("b", "h7", "h6"));
 		//FileHandler.read("test", "Board");
 		
 	}
