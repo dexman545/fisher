@@ -1,7 +1,5 @@
 package Server.ChessEngine;
 
-import java.util.Arrays;
-import java.util.Arrays.*;
 //TODO CASTLING, YOU FOOL!
 //after pawn/rook/king move, add ".hasMoved.ep"
 public class Movement {
