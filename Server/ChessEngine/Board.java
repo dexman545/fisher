@@ -3,10 +3,10 @@ package Server.ChessEngine;
 //Use JavaFX for GUI/render
 public interface Board {
 	
-	public static String[][] board = new String[8][8];
-	public static String[] file = {"A", "B", "C", "D", "E", "F", "G", "H"};
+	String[][] board = new String[8][8];
+	String[] file = {"A", "B", "C", "D", "E", "F", "G", "H"};
 	
-	public static void createBoard(String...args) {
+	static void createBoard(String...args) {
 	try{
 		if (args[0] == "new") {
 	
@@ -36,6 +36,7 @@ public interface Board {
 		     	System.out.println(file[i] + "" + (j+1) + " " + board[i][j]);
 		*/
 	//Main.newTurn();
+
 	//load the game args[2] is the file to be loaded from the save folder, either Board, time, or turn
 	} else if (args[0] == "load"){
 		System.out.println("Loading..."+ args[2]);

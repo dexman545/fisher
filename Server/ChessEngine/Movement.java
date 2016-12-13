@@ -1,5 +1,7 @@
 package Server.ChessEngine;
 
+import java.util.Arrays;
+import java.util.Arrays.*;
 //TODO CASTLING, YOU FOOL!
 //after pawn/rook/king move, add ".hasMoved.ep"
 public class Movement {
@@ -374,10 +376,10 @@ public class Movement {
 	//Actually move the piece
 	public static void move(String...args) {
 		//Args in terms of Square1, Square2
-		
 
-		String[][] tempBoard = Board.board;
-			
+		//String[][] tempBoard = Arrays.copyOf(Board.board, 8);
+		String[][] tempBoard = java.util.Arrays.stream(Board.board).map(el -> el.clone()).toArray(String[][]::new);
+
 		movePiece(args[0], args[1]);
 
 		if (DetectionSystem.detectCheck()) {
@@ -393,7 +395,7 @@ public class Movement {
 					Board.board[i][j] = tempBoard[i][j];
 				}
 			}
-
+			System.out.println(Board.board[4][1]);
 			//parse args into usable ints
 			String space = args[0].toUpperCase();
 			char f1 = space.charAt(0);
@@ -409,6 +411,7 @@ public class Movement {
 			int R2 = Character.getNumericValue(r2) - 1;
 
 			String sqrToMove = Board.board[F1][R1];
+
 			if (sqrToMove != null) {
 				sqrPiece = sqrToMove.split("[.]+");
 
@@ -416,6 +419,7 @@ public class Movement {
 
 			//get colour to move
 			String person = Main.colorToMove();
+
 
 			//Begin moving piece
 			if (canMove(person, args[0], args[1])) {

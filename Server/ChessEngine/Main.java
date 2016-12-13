@@ -49,8 +49,8 @@ public class Main {
 		Board.createBoard("new");
 
 		Movement.move("e2", "e4");
-		newTurn();
-		Movement.move("e7", "e5");
+		//newTurn();
+		//Movement.move("e7", "e5");
 
 		FileHandler.save("test", "Board");
 		//System.out.println(Movement.canMove("b", "h7", "h6"));
@@ -80,5 +80,6 @@ public class Main {
 	        return "w";
         } else return "b";
     }
+
 	
 }

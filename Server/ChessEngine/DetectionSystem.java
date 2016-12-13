@@ -132,7 +132,7 @@ public class DetectionSystem {
 	//Checks whether or not check can be avoided
 	public static boolean escapePosibilities() {
 		if (detectCheck()) {
-			String[][] tempBoard = Board.board;
+			String[][] tempBoard = java.util.Arrays.stream(Board.board).map(el -> el.clone()).toArray(String[][]::new);
 			boolean canEscape = false;
 
 			//go through entire board, and if there is a piece at that location...
